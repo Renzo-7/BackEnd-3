@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import config from "./config/index.js";
+import { addLogger } from "./middleware/logger.middleware.js";
 
 import usersRouter from "./routes/users.router.js";
 import petsRouter from "./routes/pets.router.js";
@@ -15,6 +16,7 @@ const { PORT, MONGO_URI, DB_NAME } = config;
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(addLogger);
 
 app.use("/api/users", usersRouter);
 app.use("/api/pets", petsRouter);
